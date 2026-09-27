@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String COLA_APELLIDO = "apellido_Queue";
+    public static final String COLA_APELLIDO = "grupo01_Queue";
 
     @Bean
     public Queue apellidoQueue() {
