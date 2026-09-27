@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "89b532fd-e478-43bb-a2ee-ef88eaec95a1",
+		"name": "PAYGO PERU - T1 Grupo 01",
+		"description": "Colección completa de pruebas para la Evaluación T1 de DAW II.\n- ms-tarjetas (Puerto 8081)\n- ms-recargas (Puerto 8082)\n- ms-riesgo (Puerto 8083)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Tarjetas (:8081)",
+			"item": [
+				{
+					"name": "Listar Tarjetas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/tarjetas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["tarjetas"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Tarjeta por ID (Existente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/tarjetas/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["tarjetas", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Tarjeta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom_titular\": \"Carlos Sanchez\",\n    \"saldo_asignado\": 1200.0,\n    \"saldo_disponible\": 1200.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/tarjetas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["tarjetas"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Recargas (:8082)",
+			"item": [
+				{
+					"name": "Registrar Recarga - Éxito (Monto <= 70% Saldo)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idTarjeta\": 1,\n    \"montoRecarga\": 200.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/recargas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8082",
+							"path": ["recargas"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Recarga - Monto > 70% (Para Observada)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idTarjeta\": 1,\n    \"montoRecarga\": 800.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/recargas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8082",
+							"path": ["recargas"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Recarga - Tarjeta Inexistente (Error 400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idTarjeta\": 9999,\n    \"montoRecarga\": 150.0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/recargas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8082",
+							"path": ["recargas"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Recargas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/recargas",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8082",
+							"path": ["recargas"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Riesgo (:8083)",
+			"item": [
+				{
+					"name": "Listar Análisis de Riesgo (Aprobada / Observada)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/analisis",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8083",
+							"path": ["analisis"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
